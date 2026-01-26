@@ -2,6 +2,7 @@ import { useState } from "react"
 import Filtro from "../components/Filtro"
 import GrillaVideojuegos from "../components/GrillaVideojuegos"
 import Titulo from "../components/Titulo"
+import { useNavigate } from "react-router-dom"
 
 const lista = [
     {
@@ -23,6 +24,8 @@ function VideojuegosPage() {
     ]
     const [listaVideojuegos, setListaVideojuegos] = useState(lista)
 
+    const navigate = useNavigate();
+
     function filtrar(categoria) {
         if (categoria == "-1") {
             setListaVideojuegos(lista)
@@ -34,8 +37,13 @@ function VideojuegosPage() {
         }
     }
 
+    function logout() {
+        localStorage.clear()
+        navigate("/")
+    }
+
     return <div className="px-4">
-        <Titulo />
+        <Titulo onLogout={ logout }/>
         <Filtro categorias={ categorias } onFiltro={ filtrar } />
         <hr className="mb-4" />
         <GrillaVideojuegos listaVideojuegos={ listaVideojuegos } />
