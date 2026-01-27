@@ -6,7 +6,7 @@ function GrillaVideojuegos({ listaVideojuegos }) {
         {
             (function() {
                 if (listaVideojuegos.length == 0) {
-                    return <div>Cargando...</div>
+                    return <div>No hay videojuegos</div>
                 }else {
                     return listaVideojuegos.map(function(videojuego) {
                         return <CardVideojuego 
