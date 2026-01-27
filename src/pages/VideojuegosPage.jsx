@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Filtro from "../components/Filtro"
 import GrillaVideojuegos from "../components/GrillaVideojuegos"
 import Titulo from "../components/Titulo"
@@ -22,7 +22,7 @@ function VideojuegosPage() {
     const categorias = [
         "FPS", "OpenWorld"
     ]
-    const [listaVideojuegos, setListaVideojuegos] = useState(lista)
+    const [listaVideojuegos, setListaVideojuegos] = useState([])
 
     const navigate = useNavigate();
 
@@ -41,6 +41,25 @@ function VideojuegosPage() {
         localStorage.clear()
         navigate("/")
     }
+
+    async function obtenerVideojuegosHTTP() {
+        const URL = "https://script.google.com/macros/s/AKfycbxMZbg2ZTtWjfgmRVP25A2Kt6i02_SDLcu1asfc9CKNXDxLISrTxqaoK5pdgBrjmc1Ijw/exec"
+        const response = await fetch(URL)
+
+        if (!response.ok) {
+            console.error("Error de peticion. " + response.status)
+            return
+        }
+
+        const data = await response.json()
+        console.log(data)
+        setListaVideojuegos(data)
+
+    }
+
+    useEffect(function(){
+        obtenerVideojuegosHTTP()
+    }, [])
 
     return <div className="px-4">
         <Titulo onLogout={ logout }/>
