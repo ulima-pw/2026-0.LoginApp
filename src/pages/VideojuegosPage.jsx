@@ -54,7 +54,6 @@ function VideojuegosPage() {
         const data = await response.json()
         console.log(data)
         setListaVideojuegos(data)
-
     }
 
     useEffect(function(){
