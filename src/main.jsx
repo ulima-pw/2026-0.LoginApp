@@ -7,11 +7,11 @@ import VideojuegosPage from './pages/VideojuegosPage'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <HashRouter>
+    <BrowserRouter basename='/2026-0.LoginApp'>
       <Routes>
         <Route path='/' element={ <LoginPage /> } />
         <Route path='/main' element={ <VideojuegosPage /> } />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   </StrictMode>,
 )
