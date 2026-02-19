@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Filtro from "../components/Filtro"
 import GrillaVideojuegos from "../components/GrillaVideojuegos"
 import Titulo from "../components/Titulo"
+import params from "../params"
 import { useNavigate } from "react-router-dom"
 
 function VideojuegosPage() {
@@ -17,7 +18,7 @@ function VideojuegosPage() {
     }
     
     async function filtrar(categoria) {
-        const URL = "http://127.0.0.1:8000/videojuegos/"
+        const URL = `${params.BACKEND_URL}/videojuegos/`
         
         let response
         if (categoria == "-1") {
@@ -43,7 +44,7 @@ function VideojuegosPage() {
     }
 
     async function obtenerVideojuegosHTTP() {
-        const URL = "http://127.0.0.1:8000/videojuegos/"
+        const URL = `${params.BACKEND_URL}/videojuegos/`
         const response = await fetch(URL, {
             headers : {
                 "x-token" : localStorage.getItem("TOKEN")
@@ -61,7 +62,7 @@ function VideojuegosPage() {
     }
 
     async function obtenerCategoriasHTTP() {
-        const URL = "http://127.0.0.1:8000/categorias/"
+        const URL = `${params.BACKEND_URL}/categorias/`
         const response = await fetch(URL, {
             headers : {
                 "x-token" : localStorage.getItem("TOKEN")
