@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react"
-import Cabecera from "../components/Cabecera"
-import Formulario from "../components/Formulario"
-import Mensaje from "../components/Mensaje"
 import params from "../params"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import useUsuarioService from "../models/UsuarioService"
 
-function LoginPage() {
+export default function useLoginViewModel() {
     const [mensajeVisible, setMensajeVisible] = useState(false)
 
     const navigate = useNavigate()
@@ -21,37 +19,10 @@ function LoginPage() {
         }
     }, [])
 
-    async function loginHTTP(correo, password) {
-        const resp = await fetch(`${params.BACKEND_URL}/login`, {
-            method : "post",
-            body : JSON.stringify({
-                username : correo,
-                password : password
-            }),
-            headers : {
-                "content-type" : "application/json"
-            }
-        })
-        if (resp.status != 200) {
-            // Error en login
-            const data = await resp.json()
-            console.error("ERROR:", data)
-            return false
-        }
-
-        const data = await resp.json()
-        if (data.msg == "Acceso concedido"){
-            localStorage.setItem("TOKEN", data.token)
-            return true
-        }else {
-            console.error(data.detail)
-            return false
-        }
-    }
-
     async function login(correo, password) {
-
-        const resultadoLogin = await loginHTTP(correo, password)
+        const usuarioService = useUsuarioService()
+        
+        const resultadoLogin = await usuarioService.loginHTTP(correo, password)
 
         if (resultadoLogin) {
             console.log("Login correcto")
@@ -78,17 +49,12 @@ function LoginPage() {
                 login.cantidadIntentos++
                 localStorage.setItem("DATOS_LOGIN", JSON.stringify(login))
             }
-            
         }
     }
 
-    return <div className="flex justify-center">
-        <div className="border-2 rounded-lg border-gray-300 shadow-md p-4">
-            <Cabecera />
-            <Formulario onLogin={ login } />
-            <Mensaje msg={"Login error"} visible={mensajeVisible} />
-        </div>
-    </div>
+    return {
+        mensajeVisible,
+        setMensajeVisible,
+        login,
+    }
 }
-
-export default LoginPage

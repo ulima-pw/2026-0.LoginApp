@@ -1,7 +1,7 @@
 function CardVideojuego({ videojuego }) {
     return <div key={videojuego.nombre} className="border rounded-md p-4">
         <h2 className="text-2xl mb-2 text-orange-700">{videojuego.nombre}</h2>
-        <img className="mb-2" src={videojuego.imagen} />
+        <img className="mb-2" src={videojuego.url_imagen} />
         <p className="mb-2 text-sm">
             {videojuego.descripcion}
         </p>

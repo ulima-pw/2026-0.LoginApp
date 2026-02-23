@@ -1,9 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './main.css'
-import LoginPage from './pages/LoginPage'
+import LoginPage from './views/pages/LoginPage'
 import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom'
-import VideojuegosPage from './pages/VideojuegosPage'
+import VideojuegosPage from './views/pages/VideojuegosPage'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import Filtro from "../components/Filtro"
 import GrillaVideojuegos from "../components/GrillaVideojuegos"
 import Titulo from "../components/Titulo"
-import params from "../params"
+import params from "../../params"
 import { useNavigate } from "react-router-dom"
 
 function VideojuegosPage() {
